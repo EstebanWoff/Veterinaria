@@ -7,7 +7,7 @@ const duenoModel = mongoose.Schema(
         },
 
         cedula: {
-            type:String,
+            type: String,
             required: true
         },
         edad: {
@@ -30,6 +30,15 @@ const duenoModel = mongoose.Schema(
         telefono: {
             type: String,
             required: true
+        },
+        cita: {
+            type: String,
+            required: false
+        },
+        
+        rol: {
+            type: String,
+            required: false
         },
 
         correo: {

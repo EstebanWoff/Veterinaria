@@ -7,7 +7,7 @@ const veterinarioSchema = mongoose.Schema(
         },
 
         cedula: {
-            type:String,
+            type: String,
             required: true
         },
         edad: {
@@ -21,6 +21,11 @@ const veterinarioSchema = mongoose.Schema(
         },
 
         cita: {
+            type: String,
+            required: false
+        },
+
+        rol: {
             type: String,
             required: false
         },

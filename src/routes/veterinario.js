@@ -4,7 +4,7 @@ const Veterinario = require("../models/veterinario");
 
 //Nuevo doctor
 
-router.post("/veterinario", (req, res) => {
+router.post("/veterinario/crear", (req, res) => {
     const veterinario = Veterinario(req.body);
     veterinario
         .save()
@@ -13,28 +13,12 @@ router.post("/veterinario", (req, res) => {
 });
 module.exports = router;
 
-router.get("/veterinario", (req, res) => {
+router.get("/veterinario/all", (req, res) => {
     Veterinario.find().then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
 })
 
-//get veterinario por id
-router.get('/veterinario/:id', async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const veterinario = await Veterinario.findOne({ _id: id });
-        if (!veterinario) {
-            return res.status(404).send('No se encontró el veteinario');
-        }
-        res.json(veterinario);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Hubo un error al obtener el veteinario');
-    }
-});
-
 //get veterinario por nombre
-router.get('/veterinario/:nombre', async (req, res) => {
+router.get('/veterinario/buscar/:nombre', async (req, res) => {
     const { nombre } = req.params;
 
     try {
@@ -51,15 +35,15 @@ router.get('/veterinario/:nombre', async (req, res) => {
 
 //actualizar veterinario
 
-router.put("/veterinario/:nombre", (req, res) => {
-    const { nombreV } = req.params;
+router.put("/veterinario/actualizar/:id", (req, res) => {
+    const { id } = req.params;
     const { nombre, cedula, edad, telefono, correo, contraseña } = req.body;
-    Veterinario.updateOne({ nombre: nombreV }, {
+    Veterinario.updateOne({ _id: id }, {
         $set: { nombre, cedula, edad, telefono, correo, contraseña }
     }).then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
 })
 
-router.delete("/veterinario/:nombre", (req, res) => {
-    const { nombre } = req.params;
-    Veterinario.deleteOne({ nombre: nombre }).then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
+router.delete("/veterinario/eliminar/:id", (req, res) => {
+    const { id } = req.params;
+    Veterinario.deleteOne({ _id: id }).then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
 });
