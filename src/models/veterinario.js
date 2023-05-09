@@ -20,6 +20,11 @@ const veterinarioSchema = mongoose.Schema(
             required: true
         },
 
+        cita: {
+            type: String,
+            required: false
+        },
+
         correo: {
             type: String,
             required: true
@@ -29,6 +34,7 @@ const veterinarioSchema = mongoose.Schema(
             type: String,
             required: true
         }
+
     }
 )
 
