@@ -37,9 +37,9 @@ router.get('/veterinario/buscar/:nombre', async (req, res) => {
 
 router.put("/veterinario/actualizar/:id", (req, res) => {
     const { id } = req.params;
-    const { nombre, cedula, edad, telefono, correo, contraseña } = req.body;
+    const { nombre, cedula, edad, telefono, cita, correo, contraseña } = req.body;
     Veterinario.updateOne({ _id: id }, {
-        $set: { nombre, cedula, edad, telefono, correo, contraseña }
+        $set: { nombre, cedula, edad, telefono, cita, correo, contraseña }
     }).then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
 })
 

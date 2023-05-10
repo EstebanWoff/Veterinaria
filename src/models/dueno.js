@@ -20,7 +20,7 @@ const duenoModel = mongoose.Schema(
             required: true
         },
         edad_Mascota: {
-            type: Number,
+            type: String,
             required: true
         },
         raza_Mascota: {
