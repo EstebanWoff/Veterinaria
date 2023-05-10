@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const rolSchema = mongoose.Schema(
+const rolModel = mongoose.Schema(
     {
         nombre: {
             type: String,
@@ -8,4 +8,4 @@ const rolSchema = mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Rol', rolSchema);
+module.exports = mongoose.model('Rol', rolModel);

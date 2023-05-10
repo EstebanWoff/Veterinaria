@@ -28,4 +28,4 @@ const citaSchema = mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Veterinario', veterinarioSchema);
+module.exports = mongoose.model('Cita', citaSchema);

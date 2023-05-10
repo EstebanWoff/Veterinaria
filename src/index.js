@@ -5,6 +5,9 @@ const port = 3000;
 const veterinarioRoutes = require("./routes/veterinario");
 const loginRoutes = require("./routes/login");
 const duenoRoutes = require("./routes/dueno");
+const rolRoutes = require("./routes/rol");
+const citaRoutes = require("./routes/cita");
+const tipoDeServicioRoutes = require("./routes/tipoDeServicio");
 const mongoose = require("mongoose");
 require('dotenv').config();
 app.use(parser.urlencoded({ extended: false })); //permite leer los datos que vienen en la petición
@@ -13,6 +16,10 @@ app.use(parser.json()); // transforma los datos a formato JSON
 app.use("/api", veterinarioRoutes);
 app.use("/api", loginRoutes);
 app.use("/api", duenoRoutes);
+app.use("/api", rolRoutes);
+app.use("/api", tipoDeServicioRoutes);
+app.use("/api", rolRoutes);
+app.use("/api", citaRoutes);
 app.use(express.json());
 //Conexión a la base de datos
 mongoose
