@@ -24,12 +24,12 @@ router.get('/veterinario/buscar/:nombre', async (req, res) => {
     try {
         const veterinario = await Veterinario.findOne({ nombre: nombre });
         if (!veterinario) {
-            return res.status(404).send('No se encontró la medicina');
+            return res.status(404).send('No se encontró el veterinario');
         }
         res.json(veterinario);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error al obtener la medicina');
+        res.status(500).send('Hubo un error al obtener el veterinario');
     }
 });
 

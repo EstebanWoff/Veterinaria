@@ -24,12 +24,12 @@ router.get('/dueno/buscar/:nombre', async (req, res) => {
     try {
         const dueno = await duenoModel.findOne({ nombre: nombre });
         if (!dueno) {
-            return res.status(404).send('No se encontró la medicina');
+            return res.status(404).send('No se encontró el dueño');
         }
         res.json(dueno);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error al obtener la medicina');
+        res.status(500).send('Hubo un error al obtener el dueño');
     }
 });
 

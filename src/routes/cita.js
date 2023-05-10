@@ -1,51 +1,67 @@
 const express = require("express");
 const router = express.Router(); //manejador de rutas de express
-const duenoModel = require("../models/dueno");
+const citaModel = require("../models/cita");
 
-//crear dueño
+//crear cita
 
-router.post("/dueno/crear", (req, res) => {
-    const dueno = duenoModel(req.body);
-    dueno
+router.post("/cita/crear", (req, res) => {
+    const cita = citaModel(req.body);
+    cita
         .save()
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
 module.exports = router;
 
-router.get("/dueno/all", (req, res) => {
-    duenoModel.find().then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
+router.get("/cita/all", (req, res) => {
+    citaModel.find().then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
 })
 
-//get dueño por nombre
-router.get('/dueno/buscar/:nombre', async (req, res) => {
-    const { nombre } = req.params;
+//get cita por dueño
+router.get('/cita/buscar/:dueno', async (req, res) => {
+    const { dueno } = req.params;
 
     try {
-        const dueno = await duenoModel.findOne({ nombre: nombre });
-        if (!dueno) {
-            return res.status(404).send('No se encontró la medicina');
+        const cita = await citaModel.findOne({ dueno: dueno});
+        if (!cita) {
+            return res.status(404).send('No se encontró la cita');
         }
-        res.json(dueno);
+        res.json(cita);
     } catch (error) {
         console.log(error);
-        res.status(500).send('Hubo un error al obtener la medicina');
+        res.status(500).send('Hubo un error al obtener la cita');
     }
 });
 
-//actualizar dueño
+//get cita por dueño
+router.get('/cita/buscar/:veterinario', async (req, res) => {
+    const { veterinario } = req.params;
 
-router.put("/dueno/actualizar/:id", (req, res) => {
+    try {
+        const cita = await citaModel.findOne({ veterinario: veterinario});
+        if (!cita) {
+            return res.status(404).send('No se encontró la cita');
+        }
+        res.json(cita);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error al obtener la cita');
+    }
+});
+
+//actualizar cita por id
+
+router.put("/cita/actualizar/:id", (req, res) => {
     const { id } = req.params;
-    const { nombre, cedula, edad, nombre_Mascota,raza_Mascota,edad_Mascota, telefono, cita, correo, contraseña } = req.body;
-    duenoModel.updateOne({ _id: id }, {
-        $set: { nombre, cedula, edad, nombre_Mascota,raza_Mascota, edad_Mascota, telefono, cita, correo, contraseña }
+    const { dueno, veterinario, fecha, hora, tipoDeServicio } = req.body;
+    citaModel.updateOne({ _id: id }, {
+        $set: { dueno, veterinario, fecha, hora, tipoDeServicio }
     }).then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
 })
 
 //eliminar dueño
 
-router.delete("/dueno/eliminar/:id", (req, res) => {
+router.delete("/cita/eliminar/:id", (req, res) => {
     const { id } = req.params;
-    duenoModel.deleteOne({ _id: id }).then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
+    citaModel.deleteOne({ _id: id }).then((data) => res.json(data)).catch((error) => res.json({ mensaje: error }));
 });
