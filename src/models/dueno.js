@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const veterinarioSchema = mongoose.Schema(
+const duenoModel = mongoose.Schema(
     {
         nombre: {
             type: String,
@@ -15,16 +15,27 @@ const veterinarioSchema = mongoose.Schema(
             required: true
         },
 
+        nombre_Mascota: {
+            type: String,
+            required: true
+        },
+        edad_Mascota: {
+            type: String,
+            required: true
+        },
+        raza_Mascota: {
+            type: String,
+            required: true
+        },
         telefono: {
             type: String,
             required: true
         },
-
         cita: {
             type: String,
             required: false
         },
-
+        
         rol: {
             type: String,
             required: false
@@ -39,8 +50,6 @@ const veterinarioSchema = mongoose.Schema(
             type: String,
             required: true
         }
-
     }
 )
-
-module.exports = mongoose.model('Veterinario', veterinarioSchema);
+module.exports = mongoose.model('Dueno', duenoModel);
